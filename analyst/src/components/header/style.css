@@ -1,0 +1,17 @@
+.header{
+  background-color: #096dd9;
+  height:50px
+}
+._title{
+  width: 120px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 45px;
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.linechart{
+  margin-right: 5px;
+  
+}
