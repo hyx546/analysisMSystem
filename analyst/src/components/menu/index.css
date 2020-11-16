@@ -1,0 +1,11 @@
+.menu-container{
+  width: 200px;
+  background:#D9DEE4;
+  height: 1186px;
+}
+.ant-menu-vertical .ant-menu-item:not(:last-child){
+  margin: 0 !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: #fff !important;
+}
