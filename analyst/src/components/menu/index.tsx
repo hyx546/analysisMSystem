@@ -1,34 +1,81 @@
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, { CSSProperties } from 'react';
 import { Menu } from 'antd';
-
+import { LinkProps, Link } from 'react-router-dom';
+import { MenuProps } from 'antd/lib/menu/index.d';
+import { MenuItemProps } from 'antd/lib/menu/MenuItem';
+import { get } from 'lodash';
 import { Icon } from 'Icon';
-import { ROUTES } from 'config/routes';
-import {clone} from "lodash";
 
-import './index.css';
+const { SubMenu, Item } = Menu;
 
-
-const routes = clone(ROUTES);
-
-const MenuModal = () => {
-  return (
-    <Menu className="menu-container">
-      <BrowserRouter>
-        {
-          routes.map((route) =>
-            <Menu.Item key={route.key}>
-              <Route path={route.path} >
-                <Icon type={`icon-${route.iconType}`} />
-                {route.text}
-              </Route>
-            </Menu.Item>
-          )
-        }
-      </BrowserRouter>
-
-    </Menu>
-  );
+export interface BaseMenuProps {
+  menuConfig: BaseMenuConfig[];
+  menuProps?: MenuProps;
 }
 
-export default MenuModal;
+export interface BaseMenuConfig {
+  path: string;
+  title: React.ReactNode;
+  icon:string,
+  linkProps?: Omit<LinkProps, 'to' | 'title'>;
+  menuItemProps?: MenuItemProps;
+  children?: BaseMenuConfig[];
+  id?: number
+  isSubMenu?: Boolean
+}
+
+const noSelectedStyle: CSSProperties = { userSelect: 'none' };
+
+const defaultBaseMenuProps: any = {
+  className: "epidemic-sider-menu",
+  mode: "inline",
+  defaultSelectedKeys: ['1'],
+  defaultOpenKeys: ['sub1'],
+  style: { height: '100%' }
+}
+
+const generateMenuItem = ({
+  path,
+  title,
+  icon,
+  linkProps,
+  menuItemProps,
+}: Omit<BaseMenuConfig, 'children'>) => {
+  return (
+    <Item key={path} {...menuItemProps}>
+      <Link
+        {...{
+          to: path,
+          rel: 'noopener noreferrer',
+          style: noSelectedStyle,
+          ...linkProps,
+        }}
+      >
+        {title}
+      </Link>
+    </Item>
+  );
+};
+
+const BaseMenu: React.FunctionComponent<BaseMenuProps> = ({ menuConfig, menuProps }) => {
+  return (
+    <Menu {...{ ...defaultBaseMenuProps, ...menuProps }}>
+      {menuConfig.map(({ children, ...otherProps }) =>
+        !children ? (
+          generateMenuItem(otherProps)
+        ) : (
+            <SubMenu
+              key={otherProps.path}
+              title={otherProps.title}
+              style={noSelectedStyle}
+              icon={get(otherProps, 'menuItemProps.icon')}
+            >
+              {children.map((v) => generateMenuItem(v))}
+            </SubMenu>
+          ),
+      )}
+    </Menu>
+  );
+};
+
+export default BaseMenu;

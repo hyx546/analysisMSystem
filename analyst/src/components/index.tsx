@@ -1,8 +1,14 @@
 import AHeader from './header';
-import AMenu from './menu';
+import BaseMenu from './menu';
+import ALayout from './layout';
+import ASider from './sider';
+import ASiderWrapper from './sider/SiderWrapper'
 
 
 export {
   AHeader,
-  AMenu,
+  BaseMenu,
+  ALayout,
+  ASider,
+  ASiderWrapper
 }

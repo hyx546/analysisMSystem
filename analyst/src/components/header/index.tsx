@@ -2,7 +2,7 @@ import './style.css';
 
 import React from 'react';
 
-import { Icon } from '../../Icon';
+import { Icon } from 'Icon';
 
 const Header = () => {
   return (
