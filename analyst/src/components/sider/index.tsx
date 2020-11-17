@@ -4,6 +4,8 @@ import {Icon} from "Icon";
 import { SiderProps } from 'antd/lib/layout/Sider';
 import BaseMenu, { BaseMenuProps } from "components/menu";
 
+import './index.less';
+
 const { Sider } = Layout;
 
 export interface EpidemicSiderProps extends BaseMenuProps {
@@ -36,12 +38,12 @@ const EpidemicSider: React.FunctionComponent<EpidemicSiderProps> = ({
         menuConfig={menuConfig}
       />
     </Sider>
-    <div className='epidemic-triggle'>
+    {/* <div className='epidemic-triggle'>
       <Icon
         type={collapsed ? 'icon-draw-right' : 'icon-draw-left'}
         onClick={toggleCollapse}
       />
-    </div>
+    </div> */}
   </>;
   ;
 }

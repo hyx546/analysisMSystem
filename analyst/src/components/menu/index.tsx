@@ -4,7 +4,7 @@ import { LinkProps, Link } from 'react-router-dom';
 import { MenuProps } from 'antd/lib/menu/index.d';
 import { MenuItemProps } from 'antd/lib/menu/MenuItem';
 import { get } from 'lodash';
-import { Icon } from 'Icon';
+import './index.less';
 
 const { SubMenu, Item } = Menu;
 

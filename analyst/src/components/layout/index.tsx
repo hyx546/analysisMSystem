@@ -3,6 +3,8 @@ import { Layout } from 'antd';
 import { AHeader, ASiderWrapper } from 'components';
 import classnames from 'classnames';
 
+import './index.less';
+
 const wrapperArea = { display: 'flex', flex: '0 0 92px', transition: 'all 0.2s' };
 
 const { Content } = Layout;

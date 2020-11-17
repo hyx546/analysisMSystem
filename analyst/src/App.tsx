@@ -5,6 +5,8 @@ import {ALayout} from 'components';
 import antdConfig from 'config/antdConfig';
 import { ROUTES } from 'config/routes';
 
+import './App.less';
+
 
 export interface EpidemicAppProps { }
 
