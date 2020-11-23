@@ -1,0 +1,192 @@
+export const PageVData = [{
+  url:"http://www.bca333.com/#/",
+  count:'6395',
+  percent:'20.43'
+},
+{
+  url:"http://bca335.com/#/",
+  count:'4564',
+  percent:'20.43'
+},
+{
+  url:"http://bca335.com/#/member",
+  count:'3381',
+  percent:'20.43'
+},
+{
+  url:"http://www.bca333.com/#/member",
+  count:'3102',
+  percent:'20.43'
+},
+{
+  url:"http://bca335.com/#/download",
+  count:'2606',
+  percent:'20.43'
+},
+{
+  url:"http://www.bca333.com/#/download",
+  count:'2172',
+  percent:'0.43'
+},
+{
+  url:"http://bca333.com/#/",
+  count:'1656',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+{
+  url:"http://www.bca322.com/#/",
+  count:'1651',
+  percent:'0.43'
+},
+]
+
