@@ -13,6 +13,7 @@ const JsError= () => {
           <span >{item.count}{`(${item.percent}%)`}</span>
           <Icon type="icon-arrow-right" />
         </div>
+        
       </List.Item>
     )
   }
