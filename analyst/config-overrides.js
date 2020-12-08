@@ -23,10 +23,11 @@ module.exports = override(
     "components":path.resolve(__dirname, 'src/components'),
     "Icon":path.resolve(__dirname, 'src/Icon'),
     "pages":path.resolve(__dirname, 'src/pages'),
-    "consts":path.resolve(__dirname, 'src/components'),
     "store":path.resolve(__dirname, 'src/store'),
     "utils":path.resolve(__dirname, 'src/utils'),
     "config":path.resolve(__dirname, 'src/config'),
     "layouts":path.resolve(__dirname, 'src/layouts'),
+    "consts":path.resolve(__dirname, 'src/consts'),
+    
   }),
 );

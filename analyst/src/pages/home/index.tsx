@@ -5,6 +5,7 @@ import { CommonCard } from 'components';
 
 import './index.less';
 import { List } from 'antd';
+import MyBar from 'components/charts/bar';
 
 
 const Home = () => {
@@ -20,8 +21,8 @@ const Home = () => {
       <div className="home_pv" >
         <CommonCard title="pu/pv" style={{ marginRight: '1%' }}>
           <div>
-            hhhhhhhhh
-             </div>
+            <MyBar />
+          </div>
         </CommonCard>
         <CommonCard title="访问量TOP8页面">
           <List

@@ -10,7 +10,8 @@ const columnLeft: React.FC<any> = (props) => {
   const {
     title,
     placeholder,
-    onSearch
+    onSearch,
+    searchDisabled
   } = props;
 
   const onClickSearch = () => {
