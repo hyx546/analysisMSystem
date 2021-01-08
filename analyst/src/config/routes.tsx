@@ -50,4 +50,15 @@ const ROUTES: RouteConfigProps[] = [
 
 ];
 
+// 默认路由
+export const loginDefaultMountApp = '#/home';
+
+export const defaultMountApp = () => {
+  if (!window.localStorage.getItem('_t')) {
+    return '#/login';
+  } else {
+    return loginDefaultMountApp;
+  }
+};
+
 export { ROUTES };
