@@ -11,6 +11,8 @@ import { notification } from "antd";
 import { get } from "lodash";
 import { getData, postData } from "./fetchData";
 
+export const defaultHttp = 'http://localhost:3003/api';
+
 // 整合的一个get请求，
 // url:请求的地址
 // parm：参数对象
@@ -57,13 +59,15 @@ export const postApi = async (
       parm,
     );
     const errno = get(response, 'data.errno');
-    if (response.status === 200 && errno === 0) {
-      const data = get(response, 'data.data');
-      callback(data);
-    } else {
-      const errmsg = get(response, 'data.errmsg');
-      notification.error({ message: errmsg });
-    }
+    console.log('-----response',response);
+    
+    // if (response.status === 200 && errno === 0) {
+    //   const data = get(response, 'data.data');
+    //   callback(data);
+    // } else {
+    //   const errmsg = get(response, 'data.errmsg');
+    //   notification.error({ message: errmsg });
+    // }
   } catch (error) {
     finallyFn();
   }

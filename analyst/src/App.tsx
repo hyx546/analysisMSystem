@@ -67,13 +67,13 @@ const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
   return (
     <ConfigProvider {...antdConfig}>
       <GlobalEventContext.Provider value={props}>
-        {/* <Router basename="/">
-          
-        </Router> */}
-        {/* 渲染登录路由 */}
-        {window.location.hash.startsWith('#/login') && renderAuthRoutes()}
-        {/* 渲染路由 */}
-        {renderRoute()}
+        <Router basename="/">
+          {/* 渲染登录路由 */}
+          {window.location.hash.startsWith('#/login') && renderAuthRoutes()}
+          {/* 渲染路由 */}
+          {renderRoute()}
+        </Router>
+
 
 
       </GlobalEventContext.Provider>

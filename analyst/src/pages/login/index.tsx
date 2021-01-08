@@ -5,6 +5,7 @@ import './index.less';
 import { observer } from 'mobx-react';
 import { linkTo } from 'utils';
 import { defaultMountApp } from 'config/routes';
+import { defaultHttp, postApi } from 'utils/request';
 
 const Login = (props: any) => {
 
@@ -17,15 +18,21 @@ const Login = (props: any) => {
     console.log('Success:', values);
     // 校验
     if (!validateLogin()) return;
-    const token = "1121313";
-    localStorageSet('_t', token);
-    AuthStore.setIsLogin(true);
-    console.log('-----AuthStore',AuthStore.islogin);
     
-    linkTo(defaultMountApp());
-    notification.success({
-      message: '登录成功',
-    });
+    postApi(`${defaultHttp}/login`, values, (data: any) => {
+      console.log('----data',data);
+      
+    })
+    // const token = "1121313";
+    // localStorageSet('_t', token);
+    // AuthStore.setIsLogin(true);
+    // console.log('-----AuthStore', AuthStore.islogin);
+
+    // linkTo(defaultMountApp());
+    // window.location.reload()
+    // notification.success({
+    //   message: '登录成功',
+    // });
   };
 
   const onFinishFailed = (errorInfo: any) => {
