@@ -6,13 +6,18 @@
  * @Description: In User Settings Edit
  * @FilePath: /analyst/src/config/AuthStore.ts
  */
-import { observable, action, computed } from 'mobx';
+import {
+  action,
+  computed,
+  observable,
+} from 'mobx';
 import { create } from 'mobx-persist';
 
 class AuthStore {
   @observable name = '';
   @observable password = '';
   @observable islogin = false;
+  @observable user = {};
 
   @action setname = (name: string) => {
     this.name = name
@@ -26,42 +31,21 @@ class AuthStore {
     this.islogin = islogin
   }
 
-  // @doPersist('object') @observable user = {
-  //   id: '',
-  //   phone: '',
-  //   avatar: '',
-  //   nick_name: '',
-  //   real_name: '',
-  //   company: null,
-  //   roles: [],
-  //   role: '',
-  //   mail: '',
-  //   auth: {
-  //     is_admin: false,
-  //     tabs: [],
-  //   },
-  //   company_id: '',
-  // };
+  @action setUserInfo = (user:object) => {
+    console.log('----user',user);
+    this.user = user
+  }
 
   @action initStore = () => {
     this.name = '';
     this.password = '';
-    // this.user = {
-    //   id: '',
-    //   phone: '',
-    //   avatar: '',
-    //   nick_name: '',
-    //   real_name: '',
-    //   company: null,
-    //   roles: [],
-    //   role: '',
-    //   mail: '',
-    //   auth: {
-    //     is_admin: false,
-    //     tabs: [],
-    //   },
-    //   company_id: '',
-    // };
+    this.user = {
+      id: '',
+      // phone: '',
+      // avatar: '',
+      real_name: '',
+      email: '',
+    };
   };
 
   // 退出登录
@@ -92,4 +76,4 @@ const store = new AuthStore();
 
 doPersist();
 
-export default store;
+export default observable(store);

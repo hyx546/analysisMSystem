@@ -1,11 +1,21 @@
-import { Button, Checkbox, Form, Input, notification } from 'antd';
-import React from 'react';
-import AuthStore from 'config/AuthStore';
 import './index.less';
+
+import React from 'react';
+
+import {
+  Button,
+  Form,
+  Input,
+  notification,
+} from 'antd';
+import AuthStore from 'config/AuthStore';
+import { defaultMountApp } from 'config/routes';
 import { observer } from 'mobx-react';
 import { linkTo } from 'utils';
-import { defaultMountApp } from 'config/routes';
-import { defaultHttp, postApi } from 'utils/request';
+import {
+  defaultHttp,
+  postApi,
+} from 'utils/request';
 
 const Login = (props: any) => {
 
@@ -20,10 +30,10 @@ const Login = (props: any) => {
     postApi(`${defaultHttp}/login`, values, (data: any) => {
       console.log('----data', data);
       if (data) {
-        const { id } = data;
+        const { _id:id } = data;
         localStorageSet('_t', id);
+        AuthStore.setUserInfo(data);
         AuthStore.setIsLogin(true);
-
         linkTo(defaultMountApp());
         window.location.reload()
         notification.success({

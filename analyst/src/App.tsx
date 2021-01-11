@@ -1,18 +1,23 @@
-import React from 'react';
-import { Redirect, Route, HashRouter as Router, Switch, } from 'react-router-dom';
-import { ConfigProvider, Layout } from 'antd';
-import { AHeader, ALayout, ASiderWrapper } from 'components';
-import antdConfig from 'config/antdConfig';
-import { ROUTES } from 'config/routes';
-import AuthStore from 'config/AuthStore'
-
-
 import './App.less';
-import Login from 'pages/login';
-import Home from 'pages/home';
-import { observer } from 'mobx-react';
-import Sider from 'antd/lib/layout/Sider';
 
+import React from 'react';
+
+import { ConfigProvider } from 'antd';
+import {
+  AHeader,
+  ALayout,
+} from 'components';
+import antdConfig from 'config/antdConfig';
+import AuthStore from 'config/AuthStore';
+import { ROUTES } from 'config/routes';
+import { observer } from 'mobx-react';
+import Login from 'pages/login';
+import {
+  HashRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
 export interface EpidemicAppProps { }
 
@@ -35,7 +40,10 @@ const renderAuthRoutes = () => (
 const renderRoute = () => {
   return (
     <>
-      <ALayout>
+      {
+        window.localStorage.getItem('_t') && <AHeader />
+      }
+      {window.localStorage.getItem('_t') && <ALayout>
         <Switch>
           {ROUTES.map(({ components, ...props }, index) => {
             return (
@@ -46,7 +54,7 @@ const renderRoute = () => {
           }
           )}
         </Switch>
-      </ALayout>
+      </ALayout>}
       <Redirect
         to={
           window.localStorage.getItem('_t')
@@ -62,14 +70,16 @@ const wrapperArea = { display: 'flex', flex: '0 0 92px', transition: 'all 0.2s' 
 const GlobalEventContext = React.createContext({});
 
 const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
-  console.log('----AuthStore.islogin', AuthStore.islogin);
+  console.log('----AuthStore.islogin', AuthStore.user);
+  console.log('------window.localStorage.getItem', window.localStorage.getItem('_t'));
+
 
   return (
     <ConfigProvider {...antdConfig}>
       <GlobalEventContext.Provider value={props}>
         <Router basename="/">
           {/* 渲染登录路由 */}
-          {window.location.hash.startsWith('#/login') && renderAuthRoutes()}
+          {!window.localStorage.getItem('_t') && renderAuthRoutes()}
           {/* 渲染路由 */}
           {renderRoute()}
         </Router>

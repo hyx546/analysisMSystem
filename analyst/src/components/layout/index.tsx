@@ -1,10 +1,10 @@
-import React from 'react';
-import { Layout } from 'antd';
-import { AHeader, ASiderWrapper } from 'components';
-import classnames from 'classnames';
-import AuthStore from 'config/AuthStore';
-
 import './index.less';
+
+import React from 'react';
+
+import { Layout } from 'antd';
+import classnames from 'classnames';
+import { ASiderWrapper } from 'components';
 import { observer } from 'mobx-react';
 
 const wrapperArea = { display: 'flex', flex: '0 0 92px', transition: 'all 0.2s' };
@@ -26,14 +26,14 @@ const EpidemicLayout: React.FunctionComponent<EpidemicLayoutProps> = ({
   return (
     <Layout className={classnames('open-layout', layoutClassName)}>
       <Layout>
-        {/* <div style={wrapperArea}>
+        <div style={wrapperArea}>
           <ASiderWrapper />
-        </div> */}
+        </div>
         {/* <div style={wrapperArea}>
           {AuthStore.islogin && <ASiderWrapper />}
         </div> */}
-        <AHeader />
-        <ASiderWrapper />
+
+        {/* <ASiderWrapper /> */}
         <Content className={classnames('open-content', contentClassName)}>
           {children}
         </Content>
