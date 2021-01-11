@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-08 20:36:16
- * @LastEditTime: 2021-01-08 20:43:37
+ * @LastEditTime: 2021-01-11 20:31:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/src/routes/index.ts
@@ -9,7 +9,6 @@
 import { User } from '../../db/models/UserModel'; // 引入模型
 
 const express = require('express');
-
 
 // 注册路由
 export const router = express.Router();
@@ -24,24 +23,27 @@ router.use((req: any, res: any, next: any) => {
 
 // 获取用户列表信息的路由
 router.post('/login', (req: any, res: any) => {
-  console.log('-----req',req.body);
   const postData = {
     username:req.body.username,
     password:req.body.password
   };
-  console.log('----User',User);
   
   User.findOne({
     username:postData.username,
     password:postData.password
   },(err,data) => {
-    console.log('----data',data);
-    
     if(err) throw err;
     if(data) {
-      res.send('postData')
+      const req = {
+        data:data,
+      }
+      res.send(req)
     }else{
-      res.send('账号或密码错误')
+      const req = {
+        msg:'账号或密码错误',
+        error:'34000'
+      }
+      res.send(req)
     }
   })
 });

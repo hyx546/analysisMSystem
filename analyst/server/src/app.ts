@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-11 20:27:36
- * @LastEditTime: 2021-01-08 20:40:41
+ * @LastEditTime: 2021-01-11 20:32:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/src/server.ts
@@ -19,6 +19,15 @@ const app = express();
 // 通过如下配置再路由种处理request时，可以直接获得post请求的body部分
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.all('*', function (req, res, next) {
+  console.log('node server is listening');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', '*');
+  res.header('Content-Type', 'application/json;charset=utf-8');
+  next();
+});
 
 // 所有的路由会加上“／api”前缀
 app.use('/api', router); //添加router中间件

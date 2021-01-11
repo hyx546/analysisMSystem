@@ -33,13 +33,16 @@ export const getApi = async ({
       parm
     );
 
-    const errno = get(response, 'data.errno');
-    if (response.status === 200 && errno === 0) {
+    const rep = get(response, 'data');
+    const errmsg = get(rep, 'error');
+    const msg = get(rep, 'msg');
+
+    if (!errmsg) {
       const data = get(response, 'data.data');
       callback(data);
+
     } else {
-      const errmsg = get(response, 'data.errmsg');
-      notification.error({ message: errmsg });
+      notification.error({ message: msg });
     }
 
   } catch (error) {
@@ -50,7 +53,7 @@ export const getApi = async ({
 export const postApi = async (
   url = '',
   parm = {},
-  callback: Function = () => { },
+  callback: any,
   finallyFn = () => { },
 ) => {
   try {
@@ -58,16 +61,17 @@ export const postApi = async (
       url,
       parm,
     );
-    const errno = get(response, 'data.errno');
-    console.log('-----response',response);
-    
-    // if (response.status === 200 && errno === 0) {
-    //   const data = get(response, 'data.data');
-    //   callback(data);
-    // } else {
-    //   const errmsg = get(response, 'data.errmsg');
-    //   notification.error({ message: errmsg });
-    // }
+    const rep = get(response, 'data');
+    const errmsg = get(rep, 'error');
+    const msg = get(rep, 'msg');
+
+    if (!errmsg) {
+      const data = get(response, 'data.data');
+      callback(data);
+
+    } else {
+      notification.error({ message: msg });
+    }
   } catch (error) {
     finallyFn();
   }

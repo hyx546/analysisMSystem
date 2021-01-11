@@ -28,7 +28,5 @@ export const getData = (url: any, param = {}) => {
 
 // post请求
 export const postData = (url: any, param = {}) => {
-  console.log('------param',param);
-  
-  Axios.post(url, param);
+  return Axios.post(url, param);
 }

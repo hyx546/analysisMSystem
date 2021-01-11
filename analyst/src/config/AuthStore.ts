@@ -10,12 +10,12 @@ import { observable, action, computed } from 'mobx';
 import { create } from 'mobx-persist';
 
 class AuthStore {
-  @observable username = '';
+  @observable name = '';
   @observable password = '';
   @observable islogin = false;
 
-  @action setUsername = (username: string) => {
-    this.username = username
+  @action setname = (name: string) => {
+    this.name = name
   }
 
   @action setPassword = (password: string) => {
@@ -44,7 +44,7 @@ class AuthStore {
   // };
 
   @action initStore = () => {
-    this.username = '';
+    this.name = '';
     this.password = '';
     // this.user = {
     //   id: '',
@@ -72,7 +72,7 @@ class AuthStore {
   // 账号清空
   @action authClear = () => {
     this.password = '';
-    this.username = '';
+    this.name = '';
   }
 
   @computed get isLogin() {

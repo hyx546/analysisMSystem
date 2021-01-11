@@ -11,28 +11,27 @@ const Login = (props: any) => {
 
   // 账号的回调
   const onFinish = (values: any) => {
-    const { username, password } = values;
-    AuthStore.setUsername(username);
+    const { name, password } = values;
+    AuthStore.setname(name);
     AuthStore.setPassword(password)
-    console.log('----AuthStore', AuthStore);
-    console.log('Success:', values);
     // 校验
     if (!validateLogin()) return;
-    
-    postApi(`${defaultHttp}/login`, values, (data: any) => {
-      console.log('----data',data);
-      
-    })
-    // const token = "1121313";
-    // localStorageSet('_t', token);
-    // AuthStore.setIsLogin(true);
-    // console.log('-----AuthStore', AuthStore.islogin);
 
-    // linkTo(defaultMountApp());
-    // window.location.reload()
-    // notification.success({
-    //   message: '登录成功',
-    // });
+    postApi(`${defaultHttp}/login`, values, (data: any) => {
+      console.log('----data', data);
+      if (data) {
+        const { id } = data;
+        localStorageSet('_t', id);
+        AuthStore.setIsLogin(true);
+
+        linkTo(defaultMountApp());
+        window.location.reload()
+        notification.success({
+          message: '登录成功',
+        });
+      }
+    })
+
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -61,7 +60,7 @@ const Login = (props: any) => {
  * @return:
  */
   const validateLogin = () => {
-    if (!AuthStore.username) {
+    if (!AuthStore.name) {
       notification.error({
         message: '校验错误',
         description: '用户名不能为空',
@@ -97,8 +96,8 @@ const Login = (props: any) => {
         >
           <Form.Item
             label="账号"
-            name="username"
-            className="form_username form_input"
+            name="name"
+            className="form_name form_input"
             rules={[{ required: true, message: '请输入手机号/账号' }]}
           >
             <Input />
