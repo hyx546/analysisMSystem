@@ -31,10 +31,22 @@ class AuthStore {
     this.islogin = islogin
   }
 
-  @action setUserInfo = (user:object) => {
-    console.log('----user',user);
-    this.user = user
-  }
+  // @doPersist('object') @observable user = {
+  //   id: '',
+  //   phone: '',
+  //   avatar: '',
+  //   nick_name: '',
+  //   real_name: '',
+  //   company: null,
+  //   roles: [],
+  //   role: '',
+  //   mail: '',
+  //   auth: {
+  //     is_admin: false,
+  //     tabs: [],
+  //   },
+  //   company_id: '',
+  // };
 
   @action initStore = () => {
     this.name = '';
@@ -76,4 +88,4 @@ const store = new AuthStore();
 
 doPersist();
 
-export default observable(store);
+export default store;

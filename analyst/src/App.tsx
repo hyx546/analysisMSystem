@@ -8,9 +8,7 @@ import {
   ALayout,
 } from 'components';
 import antdConfig from 'config/antdConfig';
-import AuthStore from 'config/AuthStore';
 import { ROUTES } from 'config/routes';
-import { observer } from 'mobx-react';
 import Login from 'pages/login';
 import {
   HashRouter as Router,
@@ -70,10 +68,6 @@ const wrapperArea = { display: 'flex', flex: '0 0 92px', transition: 'all 0.2s' 
 const GlobalEventContext = React.createContext({});
 
 const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
-  console.log('----AuthStore.islogin', AuthStore.user);
-  console.log('------window.localStorage.getItem', window.localStorage.getItem('_t'));
-
-
   return (
     <ConfigProvider {...antdConfig}>
       <GlobalEventContext.Provider value={props}>
@@ -92,4 +86,4 @@ const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
 
 }
 
-export default observer(App);
+export default (App);

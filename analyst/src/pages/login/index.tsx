@@ -28,11 +28,10 @@ const Login = (props: any) => {
     if (!validateLogin()) return;
 
     postApi(`${defaultHttp}/login`, values, (data: any) => {
-      console.log('----data', data);
       if (data) {
         const { _id:id } = data;
         localStorageSet('_t', id);
-        AuthStore.setUserInfo(data);
+        localStorageSet('_user', JSON.stringify(data));
         AuthStore.setIsLogin(true);
         linkTo(defaultMountApp());
         window.location.reload()
