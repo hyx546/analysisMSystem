@@ -17,5 +17,5 @@ export const UserSchema = new Schema({
   name: String,
   password: String,
   email: String,
-  real_name:String
+  real_name: String
 })

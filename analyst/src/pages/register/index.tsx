@@ -1,7 +1,6 @@
 import './index.less';
 
 import React from 'react';
-import {withRouter} from 'react-router-dom';
 
 import {
   Button,
@@ -11,33 +10,33 @@ import {
 } from 'antd';
 import AuthStore from 'config/AuthStore';
 import { defaultMountApp } from 'config/routes';
-import { linkTo } from 'utils';
+import { emaliRegex, linkTo } from 'utils';
 import {
   defaultHttp,
   postApi,
 } from 'utils/request';
+import { withRouter } from 'react-router-dom';
 
-const Login = (props: any) => {
+const Register = (props: any) => {
 
   // 账号的回调
   const onFinish = (values: any) => {
-    const { name, password } = values;
-    AuthStore.setname(name);
-    AuthStore.setPassword(password)
+    const { name, password, real_name, email } = values;
     // 校验
-    if (!validateLogin()) return;
+    if (!validateLogin(values)) return;
 
-    postApi(`${defaultHttp}/login`, values, (data: any) => {
+    postApi(`${defaultHttp}/register`, values, (data: any) => {
       if (data) {
         const { _id: id } = data;
         localStorageSet('_t', id);
         localStorageSet('_user', JSON.stringify(data));
         AuthStore.setIsLogin(true);
-        linkTo(defaultMountApp());
-        window.location.reload()
         notification.success({
-          message: '登录成功',
+          message: '注册成功',
         });
+        linkTo(defaultMountApp());
+        // window.location.reload()
+        
       }
     })
 
@@ -68,22 +67,31 @@ const Login = (props: any) => {
  * @param {type}
  * @return:
  */
-  const validateLogin = () => {
-    if (!AuthStore.name) {
+  const validateLogin = (val: { name: any; password: any; real_name: any; email: any; }) => {
+    const { name, password, email } = val;
+    if (!name) {
       notification.error({
         message: '校验错误',
         description: '用户名不能为空',
       });
       return false;
     }
-    if (!AuthStore.password) {
+    if (!password) {
       notification.error({
         message: '校验错误',
         description: '密码不能为空',
       });
       return false;
     }
-    if (AuthStore.password.length < 8) {
+
+    if (email && !(emaliRegex(email))) {
+      notification.error({
+        message: '校验错误',
+        description: '邮箱格式有误',
+      });
+      return false;
+    }
+    if (password.length < 8) {
       notification.error({
         message: '校验错误',
         description: '密码长度不能小于8位 ',
@@ -94,8 +102,8 @@ const Login = (props: any) => {
   };
 
   return (
-    <div className="analyst_login">
-      <div className="login_form">
+    <div className="analyst_register">
+      <div className="register_form">
         <Form
           name="basic"
           className="form_list"
@@ -121,20 +129,35 @@ const Login = (props: any) => {
             <Input.Password />
           </Form.Item>
 
+          <Form.Item
+            label="姓名"
+            name="real_name"
+            className="form_real_name form_input"
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="邮箱"
+            name="email"
+            className="form_email form_input"
+          >
+            <Input />
+          </Form.Item>
+
           {/* <div className="forget" onClick={handleForgetPassword}>
             忘记密码？
           </div> */}
 
           <Form.Item >
             <Button type="primary" htmlType="submit" className="from_btn">
-              登录
+              立即注册
             </Button>
           </Form.Item>
           <div className="tips" >
-            新用户？
-          <Button type="link" className="register"
-          onClick={() => props.history.push('/register')}
-          >马上注册</Button>
+            <Button type="ghost" className="register"
+              onClick={() => props.history.push('/login')}
+            >登录</Button>
           </div>
         </Form>
 
@@ -148,5 +171,5 @@ const localStorageSet = (k: string, v: string) => {
   window.localStorage.setItem(k, v);
 };
 
-export default withRouter(Login);
+export default withRouter(Register);
 

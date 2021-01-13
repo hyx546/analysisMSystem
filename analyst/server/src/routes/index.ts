@@ -7,6 +7,7 @@
  * @FilePath: /analyst/server/src/routes/index.ts
  */
 import { User } from '../../db/models/UserModel'; // 引入模型
+import { Create, Find } from '../utils';
 
 const express = require('express');
 
@@ -23,27 +24,38 @@ router.use((req: any, res: any, next: any) => {
 
 // 获取用户列表信息的路由
 router.post('/login', (req: any, res: any) => {
-  const postData = {
-    username:req.body.username,
-    password:req.body.password
-  };
-  
-  User.findOne({
-    username:postData.username,
-    password:postData.password
-  },(err,data) => {
-    if(err) throw err;
-    if(data) {
-      const req = {
-        data:data,
-      }
-      res.send(req)
-    }else{
-      const req = {
-        msg:'账号或密码错误',
-        error:'34000'
-      }
-      res.send(req)
-    }
+  const { name, password } = req.body
+  Find(User, {
+    name: name,
+    password: password
+  }, (data) => {
+    res.send(data)
   })
 });
+
+// 用户注册
+router.post('/register', (req: any, res: any) => {
+  const { name, password, email, real_name } = req.body
+  Find(User, {
+    name: name,
+    password: password
+  }, (data) => {
+    // 该用户存在
+    if (data) {
+      const req = {
+        msg: '该用户已经存在',
+        error: '34001'
+      }
+      res.send(req);
+    } else {
+      Create(User, {
+        name: name,
+        password: password,
+        email: email,
+        real_name: real_name
+      }, (data) => {
+        res.send(data)
+      })
+    }
+  })
+})

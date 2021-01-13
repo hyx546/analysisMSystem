@@ -12,4 +12,4 @@ const mongoose = require('mongoose');
 
 
 //创建model，这个地方的user对应mongodb数据库中users的conllection。
-export const User = mongoose.model('user', UserSchema);
+export const User = mongoose.model('users', UserSchema);

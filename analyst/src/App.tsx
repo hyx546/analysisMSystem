@@ -10,6 +10,7 @@ import {
 import antdConfig from 'config/antdConfig';
 import { ROUTES } from 'config/routes';
 import Login from 'pages/login';
+import Register from 'pages/register/index';
 import {
   HashRouter as Router,
   Redirect,
@@ -26,7 +27,14 @@ export interface EpidemicAppProps { }
  */
 const renderAuthRoutes = () => (
   <>
-    <Route path="/login" exact render={() => <Login />} />
+    {
+      !window.localStorage.getItem('_t') &&
+      <>
+        <Route path="/login" exact render={() => <Login />} />
+        <Route path="/register" exact render={() => <Register />} />
+      </>
+    }
+
   </>
 );
 
@@ -38,21 +46,21 @@ const renderAuthRoutes = () => (
 const renderRoute = () => {
   return (
     <>
-      {
-        window.localStorage.getItem('_t') && <AHeader />
-      }
-      {window.localStorage.getItem('_t') && <ALayout>
-        <Switch>
-          {ROUTES.map(({ components, ...props }, index) => {
-            return (
-              <Route key={`${props.path}${index}`} {...props}>
-                {components}
-              </Route>
-            )
-          }
-          )}
-        </Switch>
-      </ALayout>}
+      {window.localStorage.getItem('_t') &&
+        <>
+          <AHeader />
+          <ALayout>
+            <Switch>
+              {ROUTES.map(({ components, ...props }, index) => {
+                return (
+                  <Route key={`${props.path}${index}`} {...props}>
+                    {components}
+                  </Route>
+                );
+              }
+              )}
+            </Switch>
+          </ALayout></>}
       <Redirect
         to={
           window.localStorage.getItem('_t')
@@ -73,12 +81,10 @@ const App: React.FunctionComponent<EpidemicAppProps> = (props) => {
       <GlobalEventContext.Provider value={props}>
         <Router basename="/">
           {/* 渲染登录路由 */}
-          {!window.localStorage.getItem('_t') && renderAuthRoutes()}
+          {renderAuthRoutes()}
           {/* 渲染路由 */}
           {renderRoute()}
         </Router>
-
-
 
       </GlobalEventContext.Provider>
     </ConfigProvider>

@@ -19,3 +19,9 @@ export function linkTo(path: string) {
     window.location.href = `${window.location.origin}/#${path}`;
   }
 }
+
+// 邮箱正则
+export const emaliRegex = (val: any) => {
+  const pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return pattern.test(val)
+}
