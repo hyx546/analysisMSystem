@@ -17,6 +17,7 @@
     "https": "^1.0.0",
     "mongoose": "^5.11.8",
     "nodemon": "^2.0.4",
+    "request-json": "^0.6.5",
     "superagent": "^6.1.0",
     "superagent-charset": "^1.2.0",
     "ts-node": "^8.10.2"
