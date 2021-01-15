@@ -18,7 +18,8 @@ const test = (value) => {
   console.log('----value', value)
   if (value) {
     const rows = value.Data.pageStatis || [];
-    rows.forEach((e) => {
+    const {total,totalCount} = value.Data;
+    rows.forEach((e, index) => {
       Create(PageRank, {
         count: e.count,
         page: e.page,
