@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-13 20:44:43
- * @LastEditTime: 2021-01-16 15:16:03
+ * @LastEditTime: 2021-01-16 16:07:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/src/utils/index.ts
@@ -45,8 +45,6 @@ export const Find = (model, param,callback) => {
 }
 
 export const FindAll = (model, param,callback) => {
-  console.log('-----param',param);
-  
   model.find(param, (err, data) => {
     if (err) throw err;
     if (data) {

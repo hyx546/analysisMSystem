@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-11 20:27:36
- * @LastEditTime: 2021-01-08 19:57:11
+ * @LastEditTime: 2021-01-16 15:46:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/db/schemas/UserSchema.ts
@@ -15,5 +15,6 @@ const Schema = mongoose.Schema
 export const PvAndUvSchema = new Schema({
   pv: Number,
   uv: Number,
-  createTime:String
+  createTime:String,
+  TimeQuantum:Number
 })

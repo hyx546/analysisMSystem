@@ -1,14 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2021-01-08 20:36:16
- * @LastEditTime: 2021-01-16 15:41:54
+ * @LastEditTime: 2021-01-16 16:22:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/src/routes/index.ts
  */
 import { PageTop } from '../../db/models/PageTopModel';
+import { PvAndUv } from '../../db/models/PvAndUvModel';
 import { User } from '../../db/models/UserModel'; // 引入模型
 import { PageTopCrawlerFn } from '../crawler/PageTopStatis';
+import { PvAndUvCrawlerFn } from '../crawler/PvAndUvStatis';
 import { Create, Find, FindAll } from '../utils';
 
 const express = require('express');
@@ -63,11 +65,25 @@ router.post('/register', (req: any, res: any) => {
 })
 
 //PageTopStatis
-
 router.post('/PageTopStatis', (req: any, res: any) => {
   console.log('-----req.body', req.body);
   const { TimeQuantum } = req.body
   FindAll(PageTop, {
+    TimeQuantum: TimeQuantum,
+  }, (data) => {
+    console.log('-----data', data);
+    if(data){
+      res.send(data)
+    }
+  })
+})
+
+// PvAndUv Page
+router.post('/PvAndUvStatis', (req: any, res: any) => {
+  console.log('-----req.body', req.body);
+  const { TimeQuantum } = req.body
+  // PvAndUvCrawlerFn
+  FindAll(PvAndUv, {
     TimeQuantum: TimeQuantum,
   }, (data) => {
     console.log('-----data', data);

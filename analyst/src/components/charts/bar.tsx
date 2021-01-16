@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 
-const xAxis = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 const legendData = ['PV', 'UV'];
-const PVData = [200, 300, 55, 70, 80, 120, 200]
-const UVData = [150, 300, 40, 60, 80, 100, 150]
+const MyBar: React.FC<any> = ({
+  Data = []
+}) => {
+  console.log('-----Data', Data);
+  const realData = Data.map((item: { createTime: string | any[]; }) => {
+    if (item.createTime) {
+      item.createTime = item.createTime.slice(11, 16)
+    }
+    return item
+  })
 
-const MyBar = () => {
+  const PVData = Data.map((item:any) => item.pv);
+  const UVData = Data.map((item:any) => item.uv)
+  const xAxis = realData.map((item:any) => item.createTime)
+
   const getOption = () => {
     let option: any = {
-      // title: {
-      //   text: '用户骑行订单'
-      // },
       legend: {
         data: legendData
       },
@@ -35,7 +42,7 @@ const MyBar = () => {
           data: UVData
         }
       ],
-      color:['rgb(253, 208, 137)','rgb(255, 127, 121)']
+      color: ['rgb(253, 208, 137)', 'rgb(255, 127, 121)']
     }
     return option;
   }

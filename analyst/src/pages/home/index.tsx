@@ -16,27 +16,42 @@ import { defaultHttp, postApi } from 'utils/request';
 const Home = () => {
 
   const [top8Data, setTop8Data] = useState([]);
-  const [top8Time, setTop8Time] = useState(4);
+  const [pvAndUvData, setPvAndUvData] = useState([]);
 
+  const [top8Time, setTop8Time] = useState(4);
+  const [pvAndUvTime, setPvAndUvTimeTime] = useState(4);
+
+  // 访问页top8页面
   useEffect(() => {
-    // 访问页top8页面
     postApi(`${defaultHttp}/PageTopStatis`, {
-      "appKey": "5ea9a55e5b0dd76c634bed78",
       "TimeQuantum": top8Time,
       "top": 8
     }, (data: any) => {
       if (data) {
-        // console.log('-----data',data);
         setTop8Data(data)
       }
     })
   }, [top8Time]);
 
+  // pv/uv 
+  useEffect(() => {
+    postApi(`${defaultHttp}/PvAndUvStatis`, {
+      "TimeQuantum": pvAndUvTime,
+    }, (data: any) => {
+      if (data) {
+        setPvAndUvData(data)
+      }
+    })
+  }, [pvAndUvTime]);
+
   // 点击获得时间回调
-  const timeCallBack = (value: any,type:string) => {
+  const timeCallBack = (value: number, type: string) => {
     switch (type) {
       case 'top8':
         setTop8Time(value)
+        break;
+      case 'pvAnduv':
+        setPvAndUvTimeTime(value)
         break;
       default:
         break;
@@ -53,12 +68,12 @@ const Home = () => {
         }
       </div>
       <div className="home_pv" >
-        <CommonCard title="pu/pv" style={{ marginRight: '1%' }}>
+        <CommonCard title="pu/pv" style={{ marginRight: '1%' }} onClickFn={timeCallBack} type="pvAnduv" >
           <div>
-            <MyBar />
+            <MyBar Data={pvAndUvData} />
           </div>
         </CommonCard>
-        <CommonCard title="访问量TOP8页面"  onClickFn={timeCallBack} type="top8">
+        <CommonCard title="访问量TOP8页面" onClickFn={timeCallBack} type="top8">
           <List
             size="small"
             dataSource={top8Data}

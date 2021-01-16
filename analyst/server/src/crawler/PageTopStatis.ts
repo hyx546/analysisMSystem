@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-16 12:24:02
- * @LastEditTime: 2021-01-16 15:41:38
+ * @LastEditTime: 2021-01-16 15:46:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/src/crawler/PageTopStatis.ts
@@ -22,8 +22,6 @@ const params = {
 
 const test = (params, value) => {
   const { TimeQuantum } = params
-  console.log('----params', params);
-  console.log('----value', value)
   if (value) {
     const rows = value.Data|| [];
     rows.forEach((e, index) => {
@@ -31,9 +29,7 @@ const test = (params, value) => {
         count: e.count,
         page: e.page,
         TimeQuantum: TimeQuantum,
-      }, (a) => {
-        console.log('-----a', a);
-      })
+      }, (a) => {})
     })
   }
 }
