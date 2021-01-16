@@ -2,8 +2,6 @@ import { cardData, Top8Data } from 'config/homeData';
 import React, { useEffect, useState } from 'react';
 import CardModal from './components/home_card';
 import { CommonCard } from 'components';
-
-import './index.less';
 import { List, Table } from 'antd';
 import MyBar from 'components/charts/bar';
 import Amap from 'components/map';
@@ -11,6 +9,7 @@ import { provienceData } from 'components/map/geo';
 import { browserData, browserLegendData, columns, OSData, OSLegendData } from 'consts/home';
 import APie from 'components/charts/pie';
 import { defaultHttp, postApi } from 'utils/request';
+import './index.less';
 
 
 const Home = () => {
