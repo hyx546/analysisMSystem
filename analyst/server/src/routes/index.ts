@@ -118,7 +118,7 @@ router.post('/GeoStatis', (req: any, res: any) => {
 router.post('/BrowserStatis', (req: any, res: any) => {
   console.log('-----req.body', req.body);
   const { TimeQuantum } = req.body
-  BrowserCrawlerFn
+  // BrowserCrawlerFn
   FindAll(Browser, {
     TimeQuantum: TimeQuantum,
   }, (data) => {
@@ -149,7 +149,7 @@ router.post('/OsStatis', (req: any, res: any) => {
 router.post('/PageWhStatis', (req: any, res: any) => {
   console.log('-----req.body', req.body);
   const { TimeQuantum } = req.body
-  PageWhCrawlerFn
+  // PageWhCrawlerFn
   FindAll(Os, {
     TimeQuantum: TimeQuantum,
   }, (data) => {
