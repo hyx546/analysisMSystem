@@ -15,4 +15,5 @@ const Schema = mongoose.Schema
 export const PageRankSchema = new Schema({
   count: Number,
   page: String,
+  TimeQuantum:Number
 })

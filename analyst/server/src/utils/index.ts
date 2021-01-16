@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-01-13 20:44:43
+ * @LastEditTime: 2021-01-16 15:16:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /analyst/server/src/utils/index.ts
+ */
 // 往model 里面插入一条数据
 export const Create = (model, param,callback) => {
   model.create(param, (err, data) => {
@@ -22,6 +30,27 @@ export const Find = (model, param,callback) => {
   model.findOne(param, (err, data) => {
     if (err) throw err;
     if (data) {
+      const req = {
+        data: data
+      }
+      callback(req)
+    } else {
+      const req = {
+        msg: '找不到数据',
+        error: '34002'
+      }
+      callback(req)
+    }
+  })
+}
+
+export const FindAll = (model, param,callback) => {
+  console.log('-----param',param);
+  
+  model.find(param, (err, data) => {
+    if (err) throw err;
+    if (data) {
+      console.log('----data1',data);
       const req = {
         data: data
       }

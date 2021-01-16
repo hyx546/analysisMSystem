@@ -1,5 +1,5 @@
 import { cardData, Top8Data } from 'config/homeData';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardModal from './components/home_card';
 import { CommonCard } from 'components';
 
@@ -10,9 +10,39 @@ import Amap from 'components/map';
 import { provienceData } from 'components/map/geo';
 import { browserData, browserLegendData, columns, OSData, OSLegendData } from 'consts/home';
 import APie from 'components/charts/pie';
+import { defaultHttp, postApi } from 'utils/request';
 
 
 const Home = () => {
+
+  const [top8Data, setTop8Data] = useState([]);
+  const [top8Time, setTop8Time] = useState(4);
+
+  useEffect(() => {
+    // 访问页top8页面
+    postApi(`${defaultHttp}/PageTopStatis`, {
+      "appKey": "5ea9a55e5b0dd76c634bed78",
+      "TimeQuantum": top8Time,
+      "top": 8
+    }, (data: any) => {
+      if (data) {
+        // console.log('-----data',data);
+        setTop8Data(data)
+      }
+    })
+  }, [top8Time]);
+
+  // 点击获得时间回调
+  const timeCallBack = (value: any,type:string) => {
+    switch (type) {
+      case 'top8':
+        setTop8Time(value)
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <div className="home" >
       <div className="home_card">
@@ -28,11 +58,11 @@ const Home = () => {
             <MyBar />
           </div>
         </CommonCard>
-        <CommonCard title="访问量TOP8页面">
+        <CommonCard title="访问量TOP8页面"  onClickFn={timeCallBack} type="top8">
           <List
             size="small"
-            dataSource={Top8Data}
-            renderItem={item => <List.Item>{item.url}<span style={{ float: 'right' }}>{item.count}</span></List.Item>}
+            dataSource={top8Data}
+            renderItem={(item: any) => <List.Item>{item.page}<span style={{ float: 'right' }}>{item.count}</span></List.Item>}
           />
         </CommonCard>
       </div>

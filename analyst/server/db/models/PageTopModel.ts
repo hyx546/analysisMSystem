@@ -6,9 +6,9 @@
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/db/models/UserModel.ts
  */
-import { PageRankSchema } from '../schemas/PageRankSchema';
+import { PageTopSchema } from '../schemas/PageTopSchema';
 
 const mongoose = require('mongoose');
 
 //创建model，这个地方的user对应mongodb数据库中users的conllection。
-export const PageRank = mongoose.model('pageRank', PageRankSchema);
+export const PageTop = mongoose.model('pageTop', PageTopSchema);

@@ -5,7 +5,7 @@ import { crawlerPostFun } from '../utils/crawler';
 const baseUrl = "https://backsite.hubing.online/Monitor/PageRankStatis"
 
 const params = {
-  "TimeQuantum": 4,
+  "TimeQuantum": 1, // 123456
   "appKey": "5ea9a55e5b0dd76c634bed78",
   "eTime": "",
   "keywords": "",
@@ -14,19 +14,18 @@ const params = {
   "sTime": ""
 }
 
-const test = (value) => {
+const test = (params, value) => {
+  const { TimeQuantum } = params
+  console.log('----params', params);
   console.log('----value', value)
   if (value) {
     const rows = value.Data.pageStatis || [];
-    const {total,totalCount} = value.Data;
     rows.forEach((e, index) => {
       Create(PageRank, {
         count: e.count,
         page: e.page,
-      }, (a) => {
-        console.log('-----a', a);
-      }
-      )
+        TimeQuantum: TimeQuantum,
+      }, (value) => { })
     })
   }
 }

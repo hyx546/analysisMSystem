@@ -1,13 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-01-08 20:36:16
- * @LastEditTime: 2021-01-11 20:31:29
+ * @LastEditTime: 2021-01-16 15:41:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/src/routes/index.ts
  */
+import { PageTop } from '../../db/models/PageTopModel';
 import { User } from '../../db/models/UserModel'; // 引入模型
-import { Create, Find } from '../utils';
+import { PageTopCrawlerFn } from '../crawler/PageTopStatis';
+import { Create, Find, FindAll } from '../utils';
 
 const express = require('express');
 
@@ -56,6 +58,21 @@ router.post('/register', (req: any, res: any) => {
       }, (data) => {
         res.send(data)
       })
+    }
+  })
+})
+
+//PageTopStatis
+
+router.post('/PageTopStatis', (req: any, res: any) => {
+  console.log('-----req.body', req.body);
+  const { TimeQuantum } = req.body
+  FindAll(PageTop, {
+    TimeQuantum: TimeQuantum,
+  }, (data) => {
+    console.log('-----data', data);
+    if(data){
+      res.send(data)
     }
   })
 })
