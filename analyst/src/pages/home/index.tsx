@@ -17,9 +17,11 @@ const Home = () => {
 
   const [top8Data, setTop8Data] = useState([]);
   const [pvAndUvData, setPvAndUvData] = useState([]);
+  const [geoData, setGeoData] = useState([]);
 
   const [top8Time, setTop8Time] = useState(4);
-  const [pvAndUvTime, setPvAndUvTimeTime] = useState(4);
+  const [pvAndUvTime, setPvAndUvTime] = useState(4);
+  const [geoTime, setGeoTime] = useState(4);
 
   // 访问页top8页面
   useEffect(() => {
@@ -44,6 +46,17 @@ const Home = () => {
     })
   }, [pvAndUvTime]);
 
+  // 地理分布
+  useEffect(() => {
+    postApi(`${defaultHttp}/GeoStatis`, {
+      "TimeQuantum": geoTime,
+    }, (data: any) => {
+      if (data) {
+        setGeoData(data)
+      }
+    })
+  }, [geoTime]);
+
   // 点击获得时间回调
   const timeCallBack = (value: number, type: string) => {
     switch (type) {
@@ -51,7 +64,10 @@ const Home = () => {
         setTop8Time(value)
         break;
       case 'pvAnduv':
-        setPvAndUvTimeTime(value)
+        setPvAndUvTime(value)
+        break;
+      case 'geo':
+        setGeoTime(value)
         break;
       default:
         break;
@@ -84,7 +100,7 @@ const Home = () => {
       <div className="home_geo" >
         <CommonCard title="地理分布" style={{ width: '100%', height: "500px" }}>
           <div className="geo_img">
-            <Amap />
+            <Amap data={geoData} />
           </div>
           <div className="geo_list">
             <Table

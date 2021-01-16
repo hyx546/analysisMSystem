@@ -1,15 +1,22 @@
 /*
  * @Author: your name
  * @Date: 2021-01-08 20:36:16
- * @LastEditTime: 2021-01-16 16:22:24
+ * @LastEditTime: 2021-01-16 16:46:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /analyst/server/src/routes/index.ts
  */
+import { Browser } from '../../db/models/BrowserModel';
+import { Geo } from '../../db/models/GeoModel';
+import { Os } from '../../db/models/OsModel';
 import { PageTop } from '../../db/models/PageTopModel';
 import { PvAndUv } from '../../db/models/PvAndUvModel';
 import { User } from '../../db/models/UserModel'; // 引入模型
+import { BrowserCrawlerFn } from '../crawler/BrowserStatis';
+import { GeoCrawlerFn } from '../crawler/GeoStatis';
+import { OsCrawlerFn } from '../crawler/OsStatis';
 import { PageTopCrawlerFn } from '../crawler/PageTopStatis';
+import { PageWhCrawlerFn } from '../crawler/PageWhStatis';
 import { PvAndUvCrawlerFn } from '../crawler/PvAndUvStatis';
 import { Create, Find, FindAll } from '../utils';
 
@@ -84,6 +91,66 @@ router.post('/PvAndUvStatis', (req: any, res: any) => {
   const { TimeQuantum } = req.body
   // PvAndUvCrawlerFn
   FindAll(PvAndUv, {
+    TimeQuantum: TimeQuantum,
+  }, (data) => {
+    console.log('-----data', data);
+    if(data){
+      res.send(data)
+    }
+  })
+})
+
+// GeoStatis
+router.post('/GeoStatis', (req: any, res: any) => {
+  console.log('-----req.body', req.body);
+  const { TimeQuantum } = req.body
+  FindAll(Geo, {
+    TimeQuantum: TimeQuantum,
+  }, (data) => {
+    console.log('-----data', data);
+    if(data){
+      res.send(data)
+    }
+  })
+})
+
+// BrowserStatis
+router.post('/BrowserStatis', (req: any, res: any) => {
+  console.log('-----req.body', req.body);
+  const { TimeQuantum } = req.body
+  BrowserCrawlerFn
+  FindAll(Browser, {
+    TimeQuantum: TimeQuantum,
+  }, (data) => {
+    console.log('-----data', data);
+    if(data){
+      res.send(data)
+    }
+  })
+})
+
+// OsStatis
+router.post('/OsStatis', (req: any, res: any) => {
+  console.log('-----req.body', req.body);
+  const { TimeQuantum } = req.body
+  // OsCrawlerFn
+  FindAll(Os, {
+    TimeQuantum: TimeQuantum,
+  }, (data) => {
+    console.log('-----data', data);
+    if(data){
+      res.send(data)
+    }
+  })
+})
+
+// PageWhCrawlerFn
+
+router.post('/PageWhStatis', (req: any, res: any) => {
+  console.log('-----req.body', req.body);
+  const { TimeQuantum } = req.body
+  PageWhCrawlerFn
+  FindAll(Os, {
     TimeQuantum: TimeQuantum,
   }, (data) => {
     console.log('-----data', data);
